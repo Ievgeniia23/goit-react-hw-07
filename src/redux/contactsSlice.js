@@ -62,11 +62,15 @@ export default contactsSlice.reducer;
 export const selectContacts = state => state.contacts.items;
 export const selectNameFilter = state => state.filters.name;
 
+
 export const selectFilteredContacts = createSelector(
   [selectContacts, selectNameFilter],
-  (contacts, filter) => {
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
-  }
+  (contacts, filter) =>
+    contacts.filter(contact => {
+      const lowerCaseFilter = filter.toLowerCase().trim();
+      return (
+        contact.name.toLowerCase().includes(lowerCaseFilter) ||
+        contact.number.includes(lowerCaseFilter)
+      );
+    })
 );
