@@ -1,17 +1,18 @@
-import ContactList from './components/ContactList/ContactList';
-import SearchBox from './components/SearchBox/SearchBox';
-import ContactForm from './components/ContactForm/ContactForm';
-import css from './App.module.css';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App.jsx';
+import './index.css';
 
-const App = () => {
-  return (
-    <div className={css.totalWrapper}>
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <SearchBox />
-      <ContactList />
-    </div>
-  );
-};
+import { Provider } from 'react-redux';
 
-export default App;
+import { store } from './redux/store';
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <Provider store={store}>
+     
+        <App />
+      
+    </Provider>
+  </StrictMode>
+);
